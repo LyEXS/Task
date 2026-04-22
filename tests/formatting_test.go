@@ -1,8 +1,8 @@
 package tests
 
 import (
-	"lyes/task/formatters"
-	"lyes/task/input"
+	"lyes/scribe/formatters"
+	"lyes/scribe/input"
 	"regexp"
 	"testing"
 )

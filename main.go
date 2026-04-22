@@ -1,7 +1,7 @@
 package main
 
 import (
-	"lyes/task/git"
+	"lyes/scribe/git"
 )
 
 func main() {

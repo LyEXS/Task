@@ -1,4 +1,4 @@
-module lyes/task
+module lyes/scribe
 
 go 1.25.9
 

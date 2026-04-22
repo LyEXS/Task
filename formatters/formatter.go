@@ -1,7 +1,7 @@
 package formatters
 
 import (
-	"lyes/task/input"
+	"lyes/scribe/input"
 	"strings"
 )
 

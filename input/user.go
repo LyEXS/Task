@@ -4,8 +4,8 @@ import (
 	"bufio"
 	"errors"
 	"fmt"
-	"lyes/task/utils"
-	"lyes/task/validators"
+	"lyes/scribe/utils"
+	"lyes/scribe/validators"
 	"os"
 	"os/exec"
 
@@ -13,14 +13,14 @@ import (
 )
 
 var commitTypeOptions = []huh.Option[string]{
-	huh.NewOption("feat ✨", "feat"),
-	huh.NewOption("fix 🐛", "fix"),
-	huh.NewOption("docs 📚", "docs"),
-	huh.NewOption("style 💎", "style"),
-	huh.NewOption("refactor 📦", "refactor"),
-	huh.NewOption("perf 🚀", "perf"),
-	huh.NewOption("test 🚨", "test"),
-	huh.NewOption("chore ♻️", "chore"),
+	huh.NewOption("feat ✨", "feat ✨"),
+	huh.NewOption("fix 🐛", "fix 🐛"),
+	huh.NewOption("docs 📚", "docs 📚"),
+	huh.NewOption("style 💎", "style 💎"),
+	huh.NewOption("refactor 📦", "refactor 📦"),
+	huh.NewOption("perf 🚀", "perf 🚀"),
+	huh.NewOption("test 🚨", "test 🚨"),
+	huh.NewOption("chore ♻️", "chore ♻️"),
 }
 
 type CommitInfo struct {

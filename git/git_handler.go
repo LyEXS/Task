@@ -2,9 +2,9 @@ package git
 
 import (
 	"log"
-	"lyes/task/formatters"
-	"lyes/task/input"
-	"lyes/task/utils"
+	"lyes/scribe/formatters"
+	"lyes/scribe/input"
+	"lyes/scribe/utils"
 	"os"
 )
 
