@@ -18,6 +18,6 @@ func TestFormatting(t *testing.T) {
 
 	expected := regexp.MustCompile("(?s)^" + regexp.QuoteMeta(input.CommitType+": "+input.CommitTitle) + ".*" + regexp.QuoteMeta(input.CommitDesc))
 	if !expected.MatchString(got) {
-		t.Errorf(`TestFormatting(data) =%q,want match for %#q, nil`, got, expected)
+		t.Errorf(`TestFormatting(data) =%q,want match for %#q,  nil`, got, expected)
 	}
 }
