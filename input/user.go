@@ -9,7 +9,6 @@ import (
 	"lyes/task/validators"
 	"os"
 	"os/exec"
-	"strings"
 
 	"github.com/charmbracelet/huh"
 )
@@ -25,7 +24,7 @@ func GetUserInput(cfg *config.Config) (CommitInfo, error) {
 
 	scanner := bufio.NewScanner(os.Stdin)
 
-	commit_type = getCommitType(*scanner, cfg)
+	commit_type = getCommitType(cfg)
 	commit_title = getCommitTitle(*scanner)
 	commit_desc, err := getCommitDescription()
 
@@ -41,7 +40,7 @@ func GetUserInput(cfg *config.Config) (CommitInfo, error) {
 
 func getTextFromEditor(OPERATING_SYSTEM string) (string, error) {
 
-	file, err := os.Create(".git/tmp_commit_msg.txt")
+	file, err := os.Create(".git/tmp_commit_msg.md")
 
 	if err != nil {
 		return "", err
@@ -77,7 +76,7 @@ func getTextFromEditor(OPERATING_SYSTEM string) (string, error) {
 	return content, err
 }
 
-func getCommitType(scanner bufio.Scanner, cfg *config.Config) string {
+func getCommitType(cfg *config.Config) string {
 	var commitType string
 
 	var options []huh.Option[string]
@@ -114,26 +113,20 @@ func getCommitTitle(scanner bufio.Scanner) string {
 }
 
 func getCommitDescription() (string, error) {
-	var is_desc string
-	var commit_desc = ""
-	for {
-		fmt.Print("Do you want to specify description ? (y/n) ")
-		fmt.Scan(&is_desc)
-		if strings.TrimSpace(is_desc) == "y" || strings.TrimSpace(is_desc) == "n" {
-			break
-		}
-	}
+	var wantsDesc bool
+	var CommitDesc string = ""
 
-	switch strings.ToLower(strings.TrimSpace(is_desc)) {
-	case "y":
-		var err error
-		commit_desc, err = getTextFromEditor(utils.GetOS())
+	confirm := huh.NewConfirm().Title("Do you want to specify a description ?").Affirmative("Yes").Negative("No").Value(&wantsDesc)
+	err := confirm.Run()
+	if err != nil {
+		return "", err
+	}
+	if wantsDesc {
+		desc, err := getTextFromEditor(utils.GetOS())
 		if err != nil {
 			return "", err
 		}
-	case "n":
-		commit_desc = ""
+		CommitDesc = desc
 	}
-
-	return commit_desc, nil
+	return CommitDesc, nil
 }
