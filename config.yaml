@@ -1,0 +1,22 @@
+editors:
+  linux: "nano"
+  windows: "notepad"
+  darwin: "vim"
+
+commit_types:
+  - label: "feat"
+    emoji: "✨"
+  - label: "fix"
+    emoji: "🐛"
+  - label: "docs"
+    emoji: "📚"
+  - label: "style"
+    emoji: "💎"
+  - label: "refactor"
+    emoji: "📦"
+  - label: "perf"
+    emoji: "🚀"
+  - label: "test"
+    emoji: "🚨"
+  - label: "chore"
+    emoji: "♻️"

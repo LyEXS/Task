@@ -2,14 +2,15 @@ package git
 
 import (
 	"log"
+	"lyes/task/config"
 	"lyes/task/formatters"
 	"lyes/task/input"
 	"lyes/task/utils"
 	"os"
 )
 
-func handleGit() {
-	infos, err := input.GetUserInput()
+func HandleGit(cnf *config.Config) {
+	infos, err := input.GetUserInput(cnf)
 	if err != nil {
 		log.Fatal(err)
 	}

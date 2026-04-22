@@ -9,7 +9,7 @@ func ValidateType(commit_type string) error {
 	if len(strings.Fields(commit_type)) == 1 {
 		return nil
 	}
-	return errors.New("The type can only contain one and only one character")
+	return errors.New("The type must be a single word without spaces")
 }
 
 func ValidateTitle(commit_title string) error {

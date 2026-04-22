@@ -1,17 +1,16 @@
 package main
 
 import (
-	"fmt"
 	"log"
-	"lyes/task/input"
+	"lyes/task/config"
+	"lyes/task/git"
 )
 
 func main() {
-
-	commit_infos, err := input.GetUserInput()
+	config, err := config.LoadConfig("config.yaml")
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	fmt.Println(commit_infos)
+	git.HandleGit(config)
 }

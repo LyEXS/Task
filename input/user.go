@@ -4,11 +4,14 @@ import (
 	"bufio"
 	"errors"
 	"fmt"
+	"lyes/task/config"
 	"lyes/task/utils"
 	"lyes/task/validators"
 	"os"
 	"os/exec"
 	"strings"
+
+	"github.com/charmbracelet/huh"
 )
 
 type CommitInfo struct {
@@ -17,12 +20,12 @@ type CommitInfo struct {
 	CommitDesc  string
 }
 
-func GetUserInput() (CommitInfo, error) {
+func GetUserInput(cfg *config.Config) (CommitInfo, error) {
 	var commit_type, commit_title, commit_desc string
 
 	scanner := bufio.NewScanner(os.Stdin)
 
-	commit_type = getCommitType(*scanner)
+	commit_type = getCommitType(*scanner, cfg)
 	commit_title = getCommitTitle(*scanner)
 	commit_desc, err := getCommitDescription()
 
@@ -74,18 +77,26 @@ func getTextFromEditor(OPERATING_SYSTEM string) (string, error) {
 	return content, err
 }
 
-func getCommitType(scanner bufio.Scanner) string {
+func getCommitType(scanner bufio.Scanner, cfg *config.Config) string {
+	var commitType string
 
-	for {
-		fmt.Print("Type of the commit (fix, feat, docs,...) :")
-		if scanner.Scan() {
-			if err := validators.ValidateType(scanner.Text()); err == nil {
-				return scanner.Text()
-			} else {
-				fmt.Println(err)
-			}
-		}
+	var options []huh.Option[string]
+	for _, ct := range cfg.CommitTypes {
+		labelWithEmoji := fmt.Sprintf("%s %s", ct.Label, ct.Emoji)
+
+		options = append(options, huh.NewOption(labelWithEmoji, ct.Label+" "+ct.Emoji))
 	}
+	form := huh.NewForm(
+		huh.NewGroup(
+			huh.NewSelect[string]().Options(options...).Value(&commitType),
+		),
+	)
+	err := form.Run()
+	if err != nil {
+		return ""
+	}
+	return commitType
+
 }
 
 func getCommitTitle(scanner bufio.Scanner) string {
@@ -93,7 +104,7 @@ func getCommitTitle(scanner bufio.Scanner) string {
 	for {
 		fmt.Print("Title of the commit :")
 		if scanner.Scan() {
-			if err := validators.ValidateTitle(scanner.Text()); err != nil {
+			if err := validators.ValidateTitle(scanner.Text()); err == nil {
 				return scanner.Text()
 			} else {
 				fmt.Println(err)
