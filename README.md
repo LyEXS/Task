@@ -18,7 +18,7 @@ When you run `git commit`, Git calls this program through `core.editor` to handl
 
 ## How to install it
 
-### On Linux
+### On Linux & Mac
 
 Clone this repository by running the following command:
 
@@ -38,24 +38,11 @@ Finally, set Git to call your program:
 Clone this repository by running the following command:
 
     git clone https://github.com/LyEXS/Scribe
+    cd Scribe
 
 Move the executable to a folder that is in your `PATH`:
 
     move scribe.exe C:\Program Files\scribe\
-
-Finally, set Git to call your program:
-
-    git config --global core.editor "scribe"
-
-### On Mac
-
-Clone this repository by running the following command:
-
-    git clone https://github.com/LyEXS/Scribe
-
-Move the binary to a folder in your `PATH`:
-
-    sudo mv scribe /usr/local/bin/
 
 Finally, set Git to call your program:
 
