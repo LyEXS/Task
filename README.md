@@ -23,10 +23,7 @@ When you run `git commit`, Git calls this program through `core.editor` to handl
 Clone this repository by running the following command:
 
     git clone https://github.com/LyEXS/Scribe
-
-Then build the source code by running:
-
-    go build -o scribe
+    cd Scribe
 
 Move the binary to a folder in your `PATH`:
 
@@ -42,10 +39,6 @@ Clone this repository by running the following command:
 
     git clone https://github.com/LyEXS/Scribe
 
-Then build the source code by running:
-
-    go build -o scribe.exe
-
 Move the executable to a folder that is in your `PATH`:
 
     move scribe.exe C:\Program Files\scribe\
@@ -59,10 +52,6 @@ Finally, set Git to call your program:
 Clone this repository by running the following command:
 
     git clone https://github.com/LyEXS/Scribe
-
-Then build the source code by running:
-
-    go build -o scribe
 
 Move the binary to a folder in your `PATH`:
 
